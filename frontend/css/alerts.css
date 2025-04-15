@@ -1,0 +1,38 @@
+:root {
+    --blue: #205072;
+    --blue-010: #002c53;
+
+    --green: #32909C;
+    --green-010: #56C595;
+    --green-020: #7BE495;
+    --green-030: #CFF3D2;
+
+    --grey: #b1b1b1;
+
+    --black: rgb(55 65 81);
+    --white: #fff;
+}
+
+#alert, #success {
+    padding: 0.8em;
+
+    margin-bottom: 0.5em;
+    border-radius: 0.6em;
+
+    font-weight: 500;
+
+    position: relative;
+}
+
+.hide {
+    display: none;
+}
+
+
+#success.success {
+    background-color: var(--green-030);
+}
+
+#alert.error {
+    background-color: #efadad;    
+}
