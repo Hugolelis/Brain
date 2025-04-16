@@ -1,5 +1,8 @@
 const btnDelete = document.getElementById('btnDelete')
 
+form.password.addEventListener('input', checkPasswords);
+form.confirmPassword.addEventListener('input', checkPasswords);
+
 // decodificar token
 function parseJwt(token) {
     if (!token) return null
@@ -13,6 +16,9 @@ function parseJwt(token) {
     return JSON.parse(jsonPayload)
 }
 
+
+
+checkPasswords()
 
 // action
 btnDelete.addEventListener('click', () => {
@@ -30,6 +36,7 @@ btnDelete.addEventListener('click', () => {
     }).then((result) => {
         if (result.isConfirmed) {
             del(form)
+            localStorage.removeItem('token');
             window.location.href = 'register.html'
         }
     });
@@ -57,5 +64,22 @@ async function del(form) {
         if(response.error) {
             console.log(response.error)
         } 
+    }
+}
+
+function checkPasswords() {
+    const form = document.forms[0]
+
+    const token = localStorage.getItem('token')
+    const userData = parseJwt(token)
+
+    const password = form.password.value.trim()
+    const confirmPassword = form.confirmPassword.value.trim()
+
+    // Verifica se os dois campos estão preenchidos e são iguais
+    if (password && confirmPassword && password === confirmPassword && password) {
+        btnDelete.disabled = false
+    } else {
+        btnDelete.disabled = true
     }
 }

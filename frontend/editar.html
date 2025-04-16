@@ -57,7 +57,7 @@
         <section class="col-11 col-sm-11 col-md-9 col-lg-7 col-xxl-7 ">
             <div class="container container-style container-login d-flex" id="login-container">
                     <div class="sign-in form-container col-11">
-                        <form id="form" class="col-11 col-xxl-7">
+                        <form id="form" class="col-11 col-xxl-7" method="post" enctype="multipart/form-data">
                             <h1 id="title">Editar Perfil</h1>
 
                             <div class="form-style">
@@ -80,7 +80,7 @@
                                     <label for="file-input" class="custom-file-label">
                                         <span id="file-name">Foto de perfil (opcional)</span>
                                     
-                                        <button type="button" id="btnUpload" class="upload-btn"><i class="fa-solid fa-file-arrow-down"></i></button>
+                                        <button id="btnUpload" class="upload-btn"><i class="fa-solid fa-file-arrow-down"></i></button>
                                     </label>
                                     
                                     <input type="file" id="file-input" name="image" class="file-input">
@@ -91,7 +91,7 @@
                             </div>
                         </form>
                     </div>
-            </div>
+                </div>
         </section>
     </main> 
 </body>
