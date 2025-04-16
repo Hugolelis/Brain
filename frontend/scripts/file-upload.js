@@ -1,5 +1,5 @@
 document.querySelectorAll(".upload-btn").forEach(button => {
-    button.addEventListener("click", () => {
+    button.addEventListener("click", (e) => {
         const fileInput = button.closest(".file-upload").querySelector(".file-input");
         fileInput.click();
     });

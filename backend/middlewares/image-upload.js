@@ -12,7 +12,6 @@ const imageStorage = multer.diskStorage({
     }
 
     const folderPath = path.resolve("backend", "public", "imgs", folder);
-    console.log(folderPath)
 
     // Cria a pasta se ela não existir
     if (!fs.existsSync(folderPath)) {
@@ -33,7 +32,7 @@ export const imageUpload = multer({
   storage: imageStorage,
   fileFilter: (req, file, cb) => {
     if (!file.originalname.match(/\.(png|jpg)$/)) {
-      return cb(new Error("Por favor, envie apenas arquivos .jpg ou .png!"));
+      return console.log('erro')
     }
     cb(null, true);
   },

@@ -5,6 +5,7 @@ import bcrypt from 'bcrypt'
 import { createUserToken } from '../helpers/create-user-token.js'
 import { getUserByToken } from '../helpers/get-user-by-token.js'
 import { getToken } from '../helpers/get-token.js'
+import { imageUpload } from '../middlewares/image-upload.js'
 
 // repository
 import { UserRepository } from '../repositories/UserRepository.js'
@@ -31,6 +32,10 @@ export class UserController {
         // verify password
         if(password != confirmPassword) {
             return res.status(400).json({ status: 400, error: true, msg: 'As senhas não coincidem!' })
+        }
+
+        if(password.length < 5) {
+            return res.status(400).json({ status: 400, error: true, msg: 'A senha deve ter no minimo 5 caracteres!' })
         }
 
         // verify email
@@ -119,7 +124,7 @@ export class UserController {
         if(req.file) {
             image = req.file.filename
         }
-
+        
         // get user
         const token = await getToken(req)
         const user = await getUserByToken(token)
@@ -132,6 +137,10 @@ export class UserController {
         // verify password
         if(password != confirmPassword) {
             return res.status(400).json({ status: 400, error: true, msg: 'As senhas não coincidem!' })
+        }
+
+        if(newPassword.length >= 1 && newPassword.length < 5) {
+            return res.status(400).json({ status: 400, error: true, msg: 'A nova senha deve ter no minimo 5 caracteres!' })
         }
 
         const comparePassword = await bcrypt.compare(password, user.password);
@@ -177,9 +186,8 @@ export class UserController {
             res.status(200).json({ status: 200, error: false, msg: 'Usuário editado com sucesso!', data: newUserData })
 
         } catch(err) {
-            res.status(400).json({ status: 400, error: true, msg: 'Usuário não encontrado!' })
+            res.status(500).json({ status: 400, error: true, msg: 'Usuário não encontrado!' })
         }
-        
     }
 
     static async delete(req, res) {
